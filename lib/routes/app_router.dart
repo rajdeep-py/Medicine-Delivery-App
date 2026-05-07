@@ -9,8 +9,12 @@ import '../screens/lab_test/lab_test_details_screen.dart';
 import '../screens/lab_test/book_lab_test_screen.dart';
 import '../screens/patho_lab/patho_lab_screen.dart';
 import '../screens/patho_lab/patho_lab_detail_screen.dart';
+import '../screens/medicine/medicine_category_screen.dart';
+import '../screens/medicine/medicine_list_screen.dart';
+import '../screens/medicine/medicine_detail_screen.dart';
 import '../models/lab_test.dart';
 import '../models/patho_lab.dart';
+import '../models/medicine.dart';
 import '../screens/profile/profile_screen.dart';
 
 class AppRouter {
@@ -18,6 +22,8 @@ class AppRouter {
   static const String login = '/login';
   static const String home = '/home';
   static const String medicine = '/medicine';
+  static const String medicineList = '/medicine/list';
+  static const String medicineDetails = '/medicine/details';
   static const String labTests = '/lab-tests';
   static const String labTestsList = '/lab-tests/list';
   static const String labTestsDetails = '/lab-tests/list/details';
@@ -68,6 +74,24 @@ class AppRouter {
       ),
 
       GoRoute(
+        path: medicineList,
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) {
+          final category = state.extra as MedicineCategory;
+          return MedicineListScreen(category: category);
+        },
+      ),
+
+      GoRoute(
+        path: medicineDetails,
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) {
+          final medicine = state.extra as Medicine;
+          return MedicineDetailScreen(medicine: medicine);
+        },
+      ),
+
+      GoRoute(
         path: pathoLabsDetails,
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) {
@@ -94,8 +118,7 @@ class AppRouter {
           ),
           GoRoute(
             path: medicine,
-            builder: (context, state) =>
-                const Scaffold(body: Center(child: Text('Medicine Screen'))),
+            builder: (context, state) => const MedicineCategoryScreen(),
           ),
           GoRoute(
             path: labTests,
