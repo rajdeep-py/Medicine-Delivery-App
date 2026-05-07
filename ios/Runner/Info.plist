@@ -66,5 +66,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app needs access to location when open to help find your delivery address for medicine orders.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app needs camera access to scan and capture your medicine prescriptions.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app needs photo library access to upload your saved medicine prescriptions.</string>
 </dict>
 </plist>

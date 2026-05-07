@@ -81,9 +81,7 @@ class _MedicineListScreenState extends ConsumerState<MedicineListScreen> {
             bottom: 30,
             right: AppSpacing.screenPadding,
             child: InkWell(
-              onTap: () {
-                // TODO: Implement Prescription Upload
-              },
+              onTap: () => context.push('/medicine/order-prescription'),
               borderRadius: BorderRadius.circular(30),
               child: Container(
                 padding: const EdgeInsets.symmetric(

@@ -45,9 +45,7 @@ class _MedicineCategoryScreenState
                 8,
               ),
               child: OrderMedicineWithPrescriptionCard(
-                onTap: () {
-                  // TODO: Navigate to prescription flow
-                },
+                onTap: () => context.push('/medicine/order-prescription'),
               ),
             ),
           ),

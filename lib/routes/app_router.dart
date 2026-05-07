@@ -13,6 +13,7 @@ import '../screens/medicine/medicine_category_screen.dart';
 import '../screens/medicine/medicine_list_screen.dart';
 import '../screens/medicine/medicine_detail_screen.dart';
 import '../screens/medicine/search_medicine_screen.dart';
+import '../screens/medicine/order_medicine_prescription_screen.dart';
 import '../models/lab_test.dart';
 import '../models/patho_lab.dart';
 import '../models/medicine.dart';
@@ -26,6 +27,7 @@ class AppRouter {
   static const String medicineList = '/medicine/list';
   static const String medicineDetails = '/medicine/details';
   static const String medicineSearch = '/medicine/search';
+  static const String orderPrescription = '/medicine/order-prescription';
   static const String labTests = '/lab-tests';
   static const String labTestsList = '/lab-tests/list';
   static const String labTestsDetails = '/lab-tests/list/details';
@@ -97,6 +99,12 @@ class AppRouter {
         path: medicineSearch,
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) => const SearchMedicineScreen(),
+      ),
+
+      GoRoute(
+        path: orderPrescription,
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => const OrderMedicinePrescriptionScreen(),
       ),
 
       GoRoute(
