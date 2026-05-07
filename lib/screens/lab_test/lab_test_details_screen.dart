@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import '../../theme/app_theme.dart';
 import '../../models/lab_test.dart';
@@ -14,7 +15,8 @@ class LabTestDetailsScreen extends ConsumerStatefulWidget {
   const LabTestDetailsScreen({super.key, required this.test});
 
   @override
-  ConsumerState<LabTestDetailsScreen> createState() => _LabTestDetailsScreenState();
+  ConsumerState<LabTestDetailsScreen> createState() =>
+      _LabTestDetailsScreenState();
 }
 
 class _LabTestDetailsScreenState extends ConsumerState<LabTestDetailsScreen> {
@@ -45,7 +47,8 @@ class _LabTestDetailsScreenState extends ConsumerState<LabTestDetailsScreen> {
     final labTestState = ref.watch(labTestProvider);
     final category = labTestState.categories.firstWhere(
       (c) => c.id == widget.test.categoryId,
-      orElse: () => LabTestCategory(id: '', name: 'General', icon: Icons.science),
+      orElse: () =>
+          LabTestCategory(id: '', name: 'General', icon: Icons.science),
     );
 
     return Scaffold(
@@ -64,11 +67,15 @@ class _LabTestDetailsScreenState extends ConsumerState<LabTestDetailsScreen> {
                 leading: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CircleAvatar(
-                    backgroundColor: _showTitle ? Colors.transparent : Colors.black.withAlpha(50),
+                    backgroundColor: _showTitle
+                        ? Colors.transparent
+                        : Colors.black.withAlpha(50),
                     child: IconButton(
                       icon: Icon(
                         IconsaxPlusLinear.arrow_left_2,
-                        color: _showTitle ? AppColors.textPrimary : Colors.white,
+                        color: _showTitle
+                            ? AppColors.textPrimary
+                            : Colors.white,
                         size: 20,
                       ),
                       onPressed: () => Navigator.pop(context),
@@ -94,7 +101,11 @@ class _LabTestDetailsScreenState extends ConsumerState<LabTestDetailsScreen> {
                         errorBuilder: (context, error, stackTrace) => Container(
                           color: AppColors.blush,
                           child: const Center(
-                            child: Icon(IconsaxPlusLinear.image, color: AppColors.textTertiary, size: 48),
+                            child: Icon(
+                              IconsaxPlusLinear.image,
+                              color: AppColors.textTertiary,
+                              size: 48,
+                            ),
                           ),
                         ),
                       ),
@@ -126,7 +137,10 @@ class _LabTestDetailsScreenState extends ConsumerState<LabTestDetailsScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 10,
+                                  vertical: 4,
+                                ),
                                 decoration: BoxDecoration(
                                   color: AppColors.primaryAccent,
                                   borderRadius: BorderRadius.circular(20),
@@ -159,7 +173,11 @@ class _LabTestDetailsScreenState extends ConsumerState<LabTestDetailsScreen> {
                               const SizedBox(height: 6),
                               Row(
                                 children: [
-                                  const Icon(IconsaxPlusLinear.hospital, size: 16, color: Colors.white70),
+                                  const Icon(
+                                    IconsaxPlusLinear.hospital,
+                                    size: 16,
+                                    color: Colors.white70,
+                                  ),
                                   const SizedBox(width: 8),
                                   Text(
                                     widget.test.pathoLabName,
@@ -186,11 +204,16 @@ class _LabTestDetailsScreenState extends ConsumerState<LabTestDetailsScreen> {
                     const SizedBox(height: 24),
                     // Price Card Integrated in Scroll
                     Container(
-                      margin: const EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: AppSpacing.screenPadding,
+                      ),
                       padding: const EdgeInsets.all(20),
                       decoration: AppCardStyles.sleekCard.copyWith(
                         gradient: LinearGradient(
-                          colors: [AppColors.success.withAlpha(30), Colors.white],
+                          colors: [
+                            AppColors.success.withAlpha(30),
+                            Colors.white,
+                          ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
@@ -203,7 +226,9 @@ class _LabTestDetailsScreenState extends ConsumerState<LabTestDetailsScreen> {
                             children: [
                               Text(
                                 'Exclusive Price',
-                                style: AppTextStyles.caption.copyWith(color: AppColors.textSecondary),
+                                style: AppTextStyles.caption.copyWith(
+                                  color: AppColors.textSecondary,
+                                ),
                               ),
                               const SizedBox(height: 4),
                               Text(
@@ -222,14 +247,20 @@ class _LabTestDetailsScreenState extends ConsumerState<LabTestDetailsScreen> {
                               color: AppColors.success.withAlpha(40),
                               shape: BoxShape.circle,
                             ),
-                            child: const Icon(IconsaxPlusBold.wallet_check, color: AppColors.success, size: 24),
+                            child: const Icon(
+                              IconsaxPlusBold.wallet_check,
+                              color: AppColors.success,
+                              size: 24,
+                            ),
                           ),
                         ],
                       ),
                     ),
                     const SizedBox(height: 20),
                     LabTestDescriptionCard(test: widget.test),
-                    LabTestPrecautionsCard(precautions: widget.test.precautions),
+                    LabTestPrecautionsCard(
+                      precautions: widget.test.precautions,
+                    ),
                     const LabTestSampleCollectionCard(),
                     const SizedBox(height: 120), // Bottom padding for FAB
                   ],
@@ -244,11 +275,8 @@ class _LabTestDetailsScreenState extends ConsumerState<LabTestDetailsScreen> {
             left: AppSpacing.screenPadding,
             right: AppSpacing.screenPadding,
             child: InkWell(
-              onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Processing booking for ${widget.test.name}...')),
-                );
-              },
+              onTap: () =>
+                  context.push('/lab-tests/list/book', extra: widget.test),
               borderRadius: BorderRadius.circular(16),
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 18),
@@ -280,7 +308,11 @@ class _LabTestDetailsScreenState extends ConsumerState<LabTestDetailsScreen> {
                       ),
                     ),
                     SizedBox(width: 10),
-                    Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 20),
+                    Icon(
+                      Icons.arrow_forward_rounded,
+                      color: Colors.white,
+                      size: 20,
+                    ),
                   ],
                 ),
               ),

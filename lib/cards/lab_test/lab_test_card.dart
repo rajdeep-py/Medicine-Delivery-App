@@ -94,7 +94,7 @@ class LabTestCard extends StatelessWidget {
                           ),
                         ),
                         ElevatedButton(
-                          onPressed: onBookNow,
+                          onPressed: () => context.push('/lab-tests/list/book', extra: test),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.primaryAccent,
                             foregroundColor: Colors.white,

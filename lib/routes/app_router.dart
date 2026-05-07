@@ -6,6 +6,7 @@ import '../screens/main_wrapper.dart';
 import '../screens/lab_test/lab_test_category_screen.dart';
 import '../screens/lab_test/lab_test_list_screen.dart';
 import '../screens/lab_test/lab_test_details_screen.dart';
+import '../screens/lab_test/book_lab_test_screen.dart';
 import '../models/lab_test.dart';
 import '../screens/profile/profile_screen.dart';
 
@@ -17,6 +18,7 @@ class AppRouter {
   static const String labTests = '/lab-tests';
   static const String labTestsList = '/lab-tests/list';
   static const String labTestsDetails = '/lab-tests/list/details';
+  static const String bookLabTest = '/lab-tests/list/book';
   static const String pathoLabs = '/patho-labs';
   static const String profile = '/profile';
 
@@ -52,6 +54,14 @@ class AppRouter {
           return LabTestDetailsScreen(test: test);
         },
       ),
+      GoRoute(
+        path: bookLabTest,
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) {
+          final test = state.extra as LabTest;
+          return BookLabTestScreen(test: test);
+        },
+      ),
 
       // Main App Routes (Persistent Nav Bar)
       ShellRoute(
@@ -66,11 +76,13 @@ class AppRouter {
         routes: [
           GoRoute(
             path: home,
-            builder: (context, state) => const Scaffold(body: Center(child: Text('Home Screen'))),
+            builder: (context, state) =>
+                const Scaffold(body: Center(child: Text('Home Screen'))),
           ),
           GoRoute(
             path: medicine,
-            builder: (context, state) => const Scaffold(body: Center(child: Text('Medicine Screen'))),
+            builder: (context, state) =>
+                const Scaffold(body: Center(child: Text('Medicine Screen'))),
           ),
           GoRoute(
             path: labTests,
@@ -87,7 +99,8 @@ class AppRouter {
           ),
           GoRoute(
             path: pathoLabs,
-            builder: (context, state) => const Scaffold(body: Center(child: Text('Patho Labs Screen'))),
+            builder: (context, state) =>
+                const Scaffold(body: Center(child: Text('Patho Labs Screen'))),
           ),
         ],
       ),
