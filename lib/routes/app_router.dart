@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../screens/auth/splash_screen.dart';
 import '../screens/auth/login_screen.dart';
 import '../screens/main_wrapper.dart';
+import '../screens/lab_test/lab_test_category_screen.dart';
 import '../screens/profile/profile_screen.dart';
 
 class AppRouter {
@@ -59,7 +60,7 @@ class AppRouter {
           ),
           GoRoute(
             path: labTests,
-            builder: (context, state) => const Scaffold(body: Center(child: Text('Lab Tests Screen'))),
+            builder: (context, state) => const LabTestCategoryScreen(),
           ),
           GoRoute(
             path: pathoLabs,

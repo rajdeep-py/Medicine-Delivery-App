@@ -7,7 +7,6 @@ import 'package:pinput/pinput.dart';
 import '../../theme/app_theme.dart';
 import '../../cards/auth/support_bottomsheet.dart';
 import '../../providers/auth_provider.dart';
-import '../../routes/app_router.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -221,7 +220,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ),
                     buttonText: 'Verify',
                     onButtonPressed: () {
-                      context.go(AppRouter.profile);
+                      context.go('/lab-tests');
                     },
                     footer: Center(
                       child: GestureDetector(
