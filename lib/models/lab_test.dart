@@ -4,8 +4,14 @@ class LabTestCategory {
   final String id;
   final String name;
   final IconData icon;
+  final bool isPopular;
 
-  LabTestCategory({required this.id, required this.name, required this.icon});
+  LabTestCategory({
+    required this.id,
+    required this.name,
+    required this.icon,
+    this.isPopular = false,
+  });
 }
 
 class LabTest {

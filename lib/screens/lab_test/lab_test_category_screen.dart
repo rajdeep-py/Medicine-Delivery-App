@@ -57,51 +57,99 @@ class _LabTestCategoryScreenState extends ConsumerState<LabTestCategoryScreen> {
               padding: const EdgeInsets.all(AppSpacing.screenPadding),
               child: InkWell(
                 onTap: () {},
-                borderRadius: BorderRadius.circular(AppSpacing.cardRadius),
+                borderRadius: BorderRadius.circular(20),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-                  decoration: AppCardStyles.primaryGradientCard,
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withAlpha(40),
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          IconsaxPlusBold.location,
-                          color: Colors.white,
-                          size: 20,
-                        ),
+                  padding: const EdgeInsets.all(2), // For the "glow" border effect
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.white.withAlpha(50),
+                        Colors.transparent,
+                        Colors.white.withAlpha(30),
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                  ),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(18),
+                      gradient: const LinearGradient(
+                        colors: [
+                          AppColors.darkCyan,
+                          AppColors.primaryAccent,
+                          AppColors.primary,
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        stops: [0.0, 0.5, 1.0],
                       ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Nearby Patho Labs',
-                              style: AppTextStyles.cardTitle.copyWith(
-                                color: Colors.white,
-                                fontSize: 16,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.primaryAccent.withAlpha(80),
+                          blurRadius: 20,
+                          offset: const Offset(0, 10),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        // Glassmorphic Icon Container
+                        Container(
+                          padding: const EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withAlpha(30),
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(color: Colors.white.withAlpha(40)),
+                          ),
+                          child: const Icon(
+                            IconsaxPlusBold.location,
+                            color: Colors.white,
+                            size: 24,
+                          ),
+                        ),
+                        const SizedBox(width: 18),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Nearby Patho Labs',
+                                style: AppTextStyles.cardTitle.copyWith(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontFamily: 'Fraunces',
+                                  letterSpacing: 0.5,
+                                ),
                               ),
-                            ),
-                            Text(
-                              'Find certified laboratories near you',
-                              style: AppTextStyles.caption.copyWith(
-                                color: Colors.white.withAlpha(200),
+                              const SizedBox(height: 4),
+                              Text(
+                                'Explore certified laboratories in your area',
+                                style: AppTextStyles.caption.copyWith(
+                                  color: Colors.white.withAlpha(180),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w300,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      const Icon(
-                        IconsaxPlusLinear.arrow_right_3,
-                        color: Colors.white,
-                        size: 20,
-                      ),
-                    ],
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: Colors.white.withAlpha(20),
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Icon(
+                            IconsaxPlusLinear.arrow_right_3,
+                            color: Colors.white,
+                            size: 18,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
