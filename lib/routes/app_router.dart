@@ -7,7 +7,10 @@ import '../screens/lab_test/lab_test_category_screen.dart';
 import '../screens/lab_test/lab_test_list_screen.dart';
 import '../screens/lab_test/lab_test_details_screen.dart';
 import '../screens/lab_test/book_lab_test_screen.dart';
+import '../screens/patho_lab/patho_lab_screen.dart';
+import '../screens/patho_lab/patho_lab_detail_screen.dart';
 import '../models/lab_test.dart';
+import '../models/patho_lab.dart';
 import '../screens/profile/profile_screen.dart';
 
 class AppRouter {
@@ -20,6 +23,7 @@ class AppRouter {
   static const String labTestsDetails = '/lab-tests/list/details';
   static const String bookLabTest = '/lab-tests/list/book';
   static const String pathoLabs = '/patho-labs';
+  static const String pathoLabsDetails = '/patho-labs/details';
   static const String profile = '/profile';
 
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -63,6 +67,15 @@ class AppRouter {
         },
       ),
 
+      GoRoute(
+        path: pathoLabsDetails,
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) {
+          final lab = state.extra as PathoLab;
+          return PathoLabDetailScreen(lab: lab);
+        },
+      ),
+
       // Main App Routes (Persistent Nav Bar)
       ShellRoute(
         navigatorKey: _shellNavigatorKey,
@@ -99,8 +112,7 @@ class AppRouter {
           ),
           GoRoute(
             path: pathoLabs,
-            builder: (context, state) =>
-                const Scaffold(body: Center(child: Text('Patho Labs Screen'))),
+            builder: (context, state) => const PathoLabScreen(),
           ),
         ],
       ),

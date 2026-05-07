@@ -6,9 +6,8 @@ import '../../models/lab_test.dart';
 
 class LabTestCard extends StatelessWidget {
   final LabTest test;
-  final VoidCallback onBookNow;
 
-  const LabTestCard({super.key, required this.test, required this.onBookNow});
+  const LabTestCard({super.key, required this.test});
 
   @override
   Widget build(BuildContext context) {

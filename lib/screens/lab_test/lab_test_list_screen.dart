@@ -84,11 +84,6 @@ class _LabTestListScreenState extends ConsumerState<LabTestListScreen> {
                 final test = filteredTests[index];
                 return LabTestCard(
                   test: test,
-                  onBookNow: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Booking ${test.name}...')),
-                    );
-                  },
                 );
               },
             ),

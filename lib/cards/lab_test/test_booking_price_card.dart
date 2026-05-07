@@ -23,7 +23,8 @@ class _TestBookingPriceCardState extends State<TestBookingPriceCard> {
 
   @override
   Widget build(BuildContext context) {
-    final total = widget.testAmount + widget.platformCharges + widget.collectionCharges;
+    final total =
+        widget.testAmount + widget.platformCharges + widget.collectionCharges;
 
     return Container(
       padding: const EdgeInsets.all(20),
@@ -52,7 +53,7 @@ class _TestBookingPriceCardState extends State<TestBookingPriceCard> {
                   Text(
                     '₹${total.toInt()}',
                     style: AppTextStyles.header.copyWith(
-                      color: AppColors.textPrimary,
+                      color: AppColors.success,
                       fontSize: 24,
                       fontWeight: FontWeight.w900,
                     ),
@@ -64,7 +65,10 @@ class _TestBookingPriceCardState extends State<TestBookingPriceCard> {
                 onTap: () => setState(() => _isExpanded = !_isExpanded),
                 borderRadius: BorderRadius.circular(10),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.primaryAccent.withAlpha(20),
                     borderRadius: BorderRadius.circular(10),
@@ -106,7 +110,10 @@ class _TestBookingPriceCardState extends State<TestBookingPriceCard> {
                 const SizedBox(height: 16),
                 _PriceRow(label: 'Test Amount', value: widget.testAmount),
                 const SizedBox(height: 12),
-                _PriceRow(label: 'Platform Charges', value: widget.platformCharges),
+                _PriceRow(
+                  label: 'Platform Charges',
+                  value: widget.platformCharges,
+                ),
                 const SizedBox(height: 12),
                 _PriceRow(
                   label: 'Collection & Delivery',
@@ -115,7 +122,9 @@ class _TestBookingPriceCardState extends State<TestBookingPriceCard> {
                 ),
               ],
             ),
-            crossFadeState: _isExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+            crossFadeState: _isExpanded
+                ? CrossFadeState.showSecond
+                : CrossFadeState.showFirst,
             duration: const Duration(milliseconds: 300),
             sizeCurve: Curves.easeInOut,
           ),
