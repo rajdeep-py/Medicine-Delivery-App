@@ -43,69 +43,107 @@ class _MedicineCategoryScreenState
                 AppSpacing.screenPadding,
                 8,
               ),
-              child: InkWell(
-                onTap: () {
-                  // TODO: Navigate to Prescription Order Screen
-                },
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      colors: [AppColors.primary, AppColors.primaryAccent],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
+              child: Container(
+                decoration: AppCardStyles.sleekCard.copyWith(
+                  color: AppColors.surface,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withAlpha(5),
+                      blurRadius: 20,
+                      offset: const Offset(0, 10),
                     ),
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.primary.withAlpha(80),
-                        blurRadius: 16,
-                        offset: const Offset(0, 8),
-                      ),
-                    ],
-                  ),
-                  child: Row(
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Stack(
                     children: [
-                      Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withAlpha(50),
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          IconsaxPlusLinear.document_text,
-                          color: Colors.white,
-                          size: 28,
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                      Padding(
+                        padding: const EdgeInsets.all(24),
+                        child: Row(
                           children: [
-                            Text(
-                              'Order with Prescription',
-                              style: AppTextStyles.cardTitle.copyWith(
-                                color: Colors.white,
-                                fontSize: 18,
+                            Expanded(
+                              flex: 3,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 4,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.primaryAccent.withAlpha(
+                                        20,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Text(
+                                      'QUICK SERVICE',
+                                      style: AppTextStyles.tagline.copyWith(
+                                        fontSize: 10,
+                                        letterSpacing: 1.5,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Text(
+                                    'Order with\nPrescription',
+                                    style: AppTextStyles.header.copyWith(
+                                      fontSize: 22,
+                                      height: 1.1,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    'Upload and get medicines delivered in minutes',
+                                    style: AppTextStyles.caption.copyWith(
+                                      color: AppColors.textSecondary,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  InkWell(
+                                    onTap: () {},
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 20,
+                                        vertical: 12,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: AppColors.primaryAccent,
+                                        borderRadius: BorderRadius.circular(12),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: AppColors.primaryAccent
+                                                .withAlpha(60),
+                                            blurRadius: 12,
+                                            offset: const Offset(0, 6),
+                                          ),
+                                        ],
+                                      ),
+                                      child: Text(
+                                        'ORDER NOW',
+                                        style: AppTextStyles.tagline.copyWith(
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w900,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
-                            const SizedBox(height: 4),
-                            Text(
-                              'Upload prescription and let us find your medicines',
-                              style: AppTextStyles.caption.copyWith(
-                                color: Colors.white.withAlpha(200),
-                                fontSize: 12,
+                            Expanded(
+                              flex: 3,
+                              child: Image.asset(
+                                'assets/logo/order_with_prescription.png',
+                                fit: BoxFit.contain,
                               ),
                             ),
                           ],
                         ),
-                      ),
-                      const Icon(
-                        IconsaxPlusLinear.arrow_right_3,
-                        color: Colors.white,
-                        size: 20,
                       ),
                     ],
                   ),
