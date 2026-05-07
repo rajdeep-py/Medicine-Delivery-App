@@ -4,6 +4,8 @@ import '../screens/auth/splash_screen.dart';
 import '../screens/auth/login_screen.dart';
 import '../screens/main_wrapper.dart';
 import '../screens/lab_test/lab_test_category_screen.dart';
+import '../screens/lab_test/lab_test_list_screen.dart';
+import '../models/lab_test.dart';
 import '../screens/profile/profile_screen.dart';
 
 class AppRouter {
@@ -12,6 +14,7 @@ class AppRouter {
   static const String home = '/home';
   static const String medicine = '/medicine';
   static const String labTests = '/lab-tests';
+  static const String labTestsList = '/lab-tests/list';
   static const String pathoLabs = '/patho-labs';
   static const String profile = '/profile';
 
@@ -44,9 +47,9 @@ class AppRouter {
         navigatorKey: _shellNavigatorKey,
         builder: (context, state, child) {
           int index = 0;
-          if (state.uri.path == medicine) index = 1;
-          if (state.uri.path == labTests) index = 2;
-          if (state.uri.path == pathoLabs) index = 3;
+          if (state.uri.path.startsWith(medicine)) index = 1;
+          if (state.uri.path.startsWith(labTests)) index = 2;
+          if (state.uri.path.startsWith(pathoLabs)) index = 3;
           return MainWrapper(currentIndex: index, child: child);
         },
         routes: [
@@ -61,6 +64,15 @@ class AppRouter {
           GoRoute(
             path: labTests,
             builder: (context, state) => const LabTestCategoryScreen(),
+            routes: [
+              GoRoute(
+                path: 'list',
+                builder: (context, state) {
+                  final category = state.extra as LabTestCategory;
+                  return LabTestListScreen(category: category);
+                },
+              ),
+            ],
           ),
           GoRoute(
             path: pathoLabs,

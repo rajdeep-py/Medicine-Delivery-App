@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/app_bar.dart';
@@ -11,7 +12,8 @@ class LabTestCategoryScreen extends ConsumerStatefulWidget {
   const LabTestCategoryScreen({super.key});
 
   @override
-  ConsumerState<LabTestCategoryScreen> createState() => _LabTestCategoryScreenState();
+  ConsumerState<LabTestCategoryScreen> createState() =>
+      _LabTestCategoryScreenState();
 }
 
 class _LabTestCategoryScreenState extends ConsumerState<LabTestCategoryScreen> {
@@ -28,7 +30,7 @@ class _LabTestCategoryScreenState extends ConsumerState<LabTestCategoryScreen> {
   @override
   Widget build(BuildContext context) {
     final labTestState = ref.watch(labTestProvider);
-    
+
     // Filter categories based on search query
     final filteredCategories = labTestState.categories.where((category) {
       return category.name.toLowerCase().contains(_searchQuery.toLowerCase());
@@ -45,7 +47,10 @@ class _LabTestCategoryScreenState extends ConsumerState<LabTestCategoryScreen> {
               actions: [
                 IconButton(
                   onPressed: () => setState(() => _isSearching = true),
-                  icon: const Icon(IconsaxPlusLinear.search_normal_1, color: AppColors.textPrimary),
+                  icon: const Icon(
+                    IconsaxPlusLinear.search_normal_1,
+                    color: AppColors.textPrimary,
+                  ),
                 ),
               ],
             ),
@@ -59,7 +64,9 @@ class _LabTestCategoryScreenState extends ConsumerState<LabTestCategoryScreen> {
                 onTap: () {},
                 borderRadius: BorderRadius.circular(20),
                 child: Container(
-                  padding: const EdgeInsets.all(2), // For the "glow" border effect
+                  padding: const EdgeInsets.all(
+                    2,
+                  ), // For the "glow" border effect
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     gradient: LinearGradient(
@@ -73,7 +80,10 @@ class _LabTestCategoryScreenState extends ConsumerState<LabTestCategoryScreen> {
                     ),
                   ),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 20,
+                    ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(18),
                       gradient: const LinearGradient(
@@ -102,7 +112,9 @@ class _LabTestCategoryScreenState extends ConsumerState<LabTestCategoryScreen> {
                           decoration: BoxDecoration(
                             color: Colors.white.withAlpha(30),
                             borderRadius: BorderRadius.circular(15),
-                            border: Border.all(color: Colors.white.withAlpha(40)),
+                            border: Border.all(
+                              color: Colors.white.withAlpha(40),
+                            ),
                           ),
                           child: const Icon(
                             IconsaxPlusBold.location,
@@ -164,18 +176,21 @@ class _LabTestCategoryScreenState extends ConsumerState<LabTestCategoryScreen> {
                       horizontal: AppSpacing.screenPadding,
                       vertical: 8,
                     ),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 12,
-                      childAspectRatio: 0.85,
-                    ),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
+                          childAspectRatio: 0.85,
+                        ),
                     itemCount: filteredCategories.length,
                     itemBuilder: (context, index) {
                       final category = filteredCategories[index];
                       return LabTestCategoryCard(
                         category: category,
-                        onTap: () {},
+                        onTap: () {
+                          context.push('/lab-tests/list', extra: category);
+                        },
                       );
                     },
                   ),
@@ -198,7 +213,9 @@ class _LabTestCategoryScreenState extends ConsumerState<LabTestCategoryScreen> {
           child: Center(
             child: Container(
               height: 50,
-              margin: const EdgeInsets.symmetric(horizontal: AppSpacing.screenPadding),
+              margin: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.screenPadding,
+              ),
               padding: const EdgeInsets.symmetric(horizontal: 12),
               decoration: BoxDecoration(
                 color: AppColors.surface,

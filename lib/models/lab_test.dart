@@ -19,6 +19,8 @@ class LabTest {
   final String categoryId;
   final String name;
   final String description;
+  final String pathoLabName;
+  final String imageUrl;
   final double price;
 
   LabTest({
@@ -26,6 +28,8 @@ class LabTest {
     required this.categoryId,
     required this.name,
     required this.description,
+    required this.pathoLabName,
+    required this.imageUrl,
     required this.price,
   });
 }
