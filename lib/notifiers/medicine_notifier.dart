@@ -180,6 +180,22 @@ class MedicineNotifier extends StateNotifier<MedicineState> {
         .toList();
     state = state.copyWith(medicines: filtered);
   }
+
+  void searchAllMedicines(String query) {
+    if (query.isEmpty) {
+      state = state.copyWith(medicines: []);
+      return;
+    }
+    final filtered = _mockMedicines
+        .where(
+          (m) =>
+              m.name.toLowerCase().contains(query.toLowerCase()) ||
+              m.manufacturer.toLowerCase().contains(query.toLowerCase()) ||
+              m.description.toLowerCase().contains(query.toLowerCase()),
+        )
+        .toList();
+    state = state.copyWith(medicines: filtered);
+  }
 }
 
 final medicineProvider = StateNotifierProvider<MedicineNotifier, MedicineState>(
