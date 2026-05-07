@@ -5,6 +5,7 @@ import '../screens/auth/login_screen.dart';
 import '../screens/main_wrapper.dart';
 import '../screens/lab_test/lab_test_category_screen.dart';
 import '../screens/lab_test/lab_test_list_screen.dart';
+import '../screens/lab_test/lab_test_details_screen.dart';
 import '../models/lab_test.dart';
 import '../screens/profile/profile_screen.dart';
 
@@ -15,6 +16,7 @@ class AppRouter {
   static const String medicine = '/medicine';
   static const String labTests = '/lab-tests';
   static const String labTestsList = '/lab-tests/list';
+  static const String labTestsDetails = '/lab-tests/list/details';
   static const String pathoLabs = '/patho-labs';
   static const String profile = '/profile';
 
@@ -40,6 +42,15 @@ class AppRouter {
         path: profile,
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) => const ProfileScreen(),
+      ),
+
+      GoRoute(
+        path: labTestsDetails,
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) {
+          final test = state.extra as LabTest;
+          return LabTestDetailsScreen(test: test);
+        },
       ),
 
       // Main App Routes (Persistent Nav Bar)

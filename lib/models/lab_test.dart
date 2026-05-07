@@ -14,6 +14,13 @@ class LabTestCategory {
   });
 }
 
+class TestParameter {
+  final String name;
+  final String value;
+
+  TestParameter({required this.name, required this.value});
+}
+
 class LabTest {
   final String id;
   final String categoryId;
@@ -22,6 +29,8 @@ class LabTest {
   final String pathoLabName;
   final String imageUrl;
   final double price;
+  final List<TestParameter> parameters;
+  final List<String> precautions;
 
   LabTest({
     required this.id,
@@ -31,5 +40,7 @@ class LabTest {
     required this.pathoLabName,
     required this.imageUrl,
     required this.price,
+    this.parameters = const [],
+    this.precautions = const [],
   });
 }

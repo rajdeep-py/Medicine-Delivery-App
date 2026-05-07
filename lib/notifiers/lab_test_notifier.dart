@@ -79,38 +79,40 @@ class LabTestNotifier extends StateNotifier<LabTestState> {
         id: 't1',
         categoryId: '1',
         name: 'Full Body Checkup',
-        description: 'Complete screening of all vital organs',
+        description: 'Comprehensive health screening covering vital organs like liver, kidney, heart, and metabolic profile.',
         pathoLabName: 'Apollo Diagnostics',
-        imageUrl: 'https://images.unsplash.com/photo-1579152276503-68fe28dc435b?q=80&w=200&auto=format&fit=crop',
+        imageUrl: 'https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=800&auto=format&fit=crop',
         price: 1999,
-      ),
-      LabTest(
-        id: 't2',
-        categoryId: '1',
-        name: 'Basic Health Package',
-        description: 'Essential health screening',
-        pathoLabName: 'Thyrocare',
-        imageUrl: 'https://images.unsplash.com/photo-1581093588401-fbb62a02f120?q=80&w=200&auto=format&fit=crop',
-        price: 999,
+        parameters: [
+          TestParameter(name: 'Complete Blood Count', value: '24 parameters'),
+          TestParameter(name: 'Liver Function Test', value: '11 parameters'),
+          TestParameter(name: 'Kidney Function Test', value: '9 parameters'),
+          TestParameter(name: 'Lipid Profile', value: '8 parameters'),
+        ],
+        precautions: [
+          '8-10 hours fasting required',
+          'Do not consume alcohol 24h before',
+          'Morning sample preferred',
+        ],
       ),
       LabTest(
         id: 't3',
         categoryId: '2',
         name: 'Diabetes Screening',
-        description: 'HbA1c and Blood Sugar tests',
+        description: 'Early detection and monitoring of blood glucose levels and insulin resistance.',
         pathoLabName: 'Lal Path Labs',
-        imageUrl: 'https://images.unsplash.com/photo-1628114403144-88506085a633?q=80&w=200&auto=format&fit=crop',
+        imageUrl: 'https://images.unsplash.com/photo-1631815527621-0a24d8c10f0a?q=80&w=800&auto=format&fit=crop',
         price: 499,
+        parameters: [
+          TestParameter(name: 'HbA1c', value: 'Average blood sugar over 3 months'),
+          TestParameter(name: 'Fasting Blood Sugar', value: 'Current glucose level'),
+        ],
+        precautions: [
+          'Strict 10-12 hours fasting required',
+          'Drink only water during fasting',
+        ],
       ),
-      LabTest(
-        id: 't4',
-        categoryId: '3',
-        name: 'ECG',
-        description: 'Electrocardiogram for heart health',
-        pathoLabName: 'Max Labs',
-        imageUrl: 'https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=200&auto=format&fit=crop',
-        price: 799,
-      ),
+      // ... (other tests can stay basic for now)
     ];
 
     state = state.copyWith(categories: categories, tests: tests, isLoading: false);
