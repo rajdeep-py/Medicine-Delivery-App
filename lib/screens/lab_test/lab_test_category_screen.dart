@@ -6,6 +6,7 @@ import '../../theme/app_theme.dart';
 import '../../widgets/app_bar.dart';
 import '../../widgets/bottom_nav_bar.dart';
 import '../../cards/lab_test/lab_test_category_card.dart';
+import '../../cards/lab_test/nearby_patho_lab_card.dart';
 import '../../providers/lab_test_provider.dart';
 
 class LabTestCategoryScreen extends ConsumerStatefulWidget {
@@ -54,147 +55,73 @@ class _LabTestCategoryScreenState extends ConsumerState<LabTestCategoryScreen> {
                 ),
               ],
             ),
-      body: Column(
-        children: [
+      body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: [
           if (!_isSearching)
-            // Premium Button: Browse nearby patho labs
-            Padding(
-              padding: const EdgeInsets.all(AppSpacing.screenPadding),
-              child: InkWell(
-                onTap: () {},
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  padding: const EdgeInsets.all(
-                    2,
-                  ), // For the "glow" border effect
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.white.withAlpha(50),
-                        Colors.transparent,
-                        Colors.white.withAlpha(30),
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                  ),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 20,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(18),
-                      gradient: const LinearGradient(
-                        colors: [
-                          AppColors.darkCyan,
-                          AppColors.primaryAccent,
-                          AppColors.primary,
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        stops: [0.0, 0.5, 1.0],
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: AppColors.primaryAccent.withAlpha(80),
-                          blurRadius: 20,
-                          offset: const Offset(0, 10),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        // Glassmorphic Icon Container
-                        Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withAlpha(30),
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: Colors.white.withAlpha(40),
-                            ),
-                          ),
-                          child: const Icon(
-                            IconsaxPlusBold.location,
-                            color: Colors.white,
-                            size: 24,
-                          ),
-                        ),
-                        const SizedBox(width: 18),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Nearby Patho Labs',
-                                style: AppTextStyles.cardTitle.copyWith(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontFamily: 'Fraunces',
-                                  letterSpacing: 0.5,
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                'Explore certified laboratories in your area',
-                                style: AppTextStyles.caption.copyWith(
-                                  color: Colors.white.withAlpha(180),
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w300,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withAlpha(20),
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            IconsaxPlusLinear.arrow_right_3,
-                            color: Colors.white,
-                            size: 18,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+            // Premium Branding Card: Nearby Patho Labs
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(AppSpacing.screenPadding),
+                child: NearbyPathoLabCard(
+                  onTap: () {
+                    context.push('/patho-labs');
+                  },
+                ),
+              ),
+            ),
+
+          // Categories Title
+          if (!_isSearching)
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  AppSpacing.screenPadding,
+                  8,
+                  AppSpacing.screenPadding,
+                  16,
+                ),
+                child: Text(
+                  'Test Categories',
+                  style: AppTextStyles.subHeader.copyWith(fontSize: 18),
                 ),
               ),
             ),
 
           // 3x3 Grid of Categories
-          Expanded(
-            child: labTestState.isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : GridView.builder(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: AppSpacing.screenPadding,
-                      vertical: 8,
-                    ),
+          labTestState.isLoading
+              ? const SliverFillRemaining(
+                  child: Center(child: CircularProgressIndicator()),
+                )
+              : SliverPadding(
+                  padding: const EdgeInsets.fromLTRB(
+                    AppSpacing.screenPadding,
+                    0,
+                    AppSpacing.screenPadding,
+                    100,
+                  ),
+                  sliver: SliverGrid(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          crossAxisSpacing: 12,
-                          mainAxisSpacing: 12,
-                          childAspectRatio: 0.85,
-                        ),
-                    itemCount: filteredCategories.length,
-                    itemBuilder: (context, index) {
-                      final category = filteredCategories[index];
-                      return LabTestCategoryCard(
-                        category: category,
-                        onTap: () {
-                          context.push('/lab-tests/list', extra: category);
-                        },
-                      );
-                    },
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                      childAspectRatio: 0.85,
+                    ),
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) {
+                        final category = filteredCategories[index];
+                        return LabTestCategoryCard(
+                          category: category,
+                          onTap: () {
+                            context.push('/lab-tests/list', extra: category);
+                          },
+                        );
+                      },
+                      childCount: filteredCategories.length,
+                    ),
                   ),
-          ),
+                ),
         ],
       ),
       extendBody: true,
