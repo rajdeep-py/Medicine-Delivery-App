@@ -31,43 +31,153 @@ class _MedicineCategoryScreenState
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: _buildDefaultAppBar(),
-      body: medState.categories.isEmpty
-          ? Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    IconsaxPlusLinear.search_status,
-                    size: 64,
-                    color: AppColors.textTertiary.withAlpha(100),
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    'No categories found',
-                    style: AppTextStyles.cardTitle.copyWith(
-                      color: AppColors.textTertiary,
-                    ),
-                  ),
-                ],
-              ),
-            )
-          : GridView.builder(
+      body: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          // Branding Card: Order with Prescription
+          SliverToBoxAdapter(
+            child: Padding(
               padding: const EdgeInsets.fromLTRB(
                 AppSpacing.screenPadding,
-                12,
+                16,
                 AppSpacing.screenPadding,
-                100,
+                8,
               ),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
-                childAspectRatio: 0.85,
+              child: InkWell(
+                onTap: () {
+                  // TODO: Navigate to Prescription Order Screen
+                },
+                borderRadius: BorderRadius.circular(20),
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      colors: [AppColors.primary, AppColors.primaryAccent],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.primary.withAlpha(80),
+                        blurRadius: 16,
+                        offset: const Offset(0, 8),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withAlpha(50),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          IconsaxPlusLinear.document_text,
+                          color: Colors.white,
+                          size: 28,
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Order with Prescription',
+                              style: AppTextStyles.cardTitle.copyWith(
+                                color: Colors.white,
+                                fontSize: 18,
+                              ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              'Upload prescription and let us find your medicines',
+                              style: AppTextStyles.caption.copyWith(
+                                color: Colors.white.withAlpha(200),
+                                fontSize: 12,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const Icon(
+                        IconsaxPlusLinear.arrow_right_3,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              itemCount: medState.categories.length,
-              itemBuilder: (context, index) =>
-                  MedicineCategoryCard(category: medState.categories[index]),
             ),
+          ),
+
+          // Categories Title
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(
+                AppSpacing.screenPadding,
+                24,
+                AppSpacing.screenPadding,
+                16,
+              ),
+              child: Text(
+                'Top Categories',
+                style: AppTextStyles.subHeader.copyWith(fontSize: 18),
+              ),
+            ),
+          ),
+
+          // Categories Grid
+          medState.categories.isEmpty
+              ? SliverFillRemaining(
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          IconsaxPlusLinear.search_status,
+                          size: 64,
+                          color: AppColors.textTertiary.withAlpha(100),
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          'No categories found',
+                          style: AppTextStyles.cardTitle.copyWith(
+                            color: AppColors.textTertiary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              : SliverPadding(
+                  padding: const EdgeInsets.fromLTRB(
+                    AppSpacing.screenPadding,
+                    0,
+                    AppSpacing.screenPadding,
+                    100,
+                  ),
+                  sliver: SliverGrid(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
+                          childAspectRatio: 0.85,
+                        ),
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) => MedicineCategoryCard(
+                        category: medState.categories[index],
+                      ),
+                      childCount: medState.categories.length,
+                    ),
+                  ),
+                ),
+        ],
+      ),
     );
   }
 
