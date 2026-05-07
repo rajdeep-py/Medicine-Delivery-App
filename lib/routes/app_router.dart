@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../screens/auth/splash_screen.dart';
 import '../screens/auth/login_screen.dart';
 import '../screens/main_wrapper.dart';
+import '../screens/profile/profile_screen.dart';
 
 class AppRouter {
   static const String splash = '/';
@@ -11,6 +12,7 @@ class AppRouter {
   static const String medicine = '/medicine';
   static const String labTests = '/lab-tests';
   static const String pathoLabs = '/patho-labs';
+  static const String profile = '/profile';
 
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
   static final _shellNavigatorKey = GlobalKey<NavigatorState>();
@@ -29,6 +31,11 @@ class AppRouter {
         path: login,
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) => const LoginScreen(),
+      ),
+      GoRoute(
+        path: profile,
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => const ProfileScreen(),
       ),
 
       // Main App Routes (Persistent Nav Bar)

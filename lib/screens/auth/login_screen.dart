@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import 'package:pinput/pinput.dart';
 import '../../theme/app_theme.dart';
 import '../../cards/auth/support_bottomsheet.dart';
 import '../../providers/auth_provider.dart';
+import '../../routes/app_router.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -219,7 +221,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ),
                     buttonText: 'Verify',
                     onButtonPressed: () {
-                      // Implement verification logic
+                      context.go(AppRouter.profile);
                     },
                     footer: Center(
                       child: GestureDetector(
