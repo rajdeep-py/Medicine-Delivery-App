@@ -16,6 +16,7 @@ import '../screens/medicine/medicine_detail_screen.dart';
 import '../screens/medicine/search_medicine_screen.dart';
 import '../screens/medicine/order_medicine_prescription_screen.dart';
 import '../screens/cart/cart_screen.dart';
+import '../screens/cart/select_delivery_location_screen.dart';
 import '../models/lab_test.dart';
 import '../models/patho_lab.dart';
 import '../models/medicine.dart';
@@ -31,6 +32,7 @@ class AppRouter {
   static const String medicineSearch = '/medicine/search';
   static const String orderPrescription = '/medicine/order-prescription';
   static const String cart = '/cart';
+  static const String selectLocation = '/cart/select-location';
   static const String labTests = '/lab-tests';
   static const String labTestsList = '/lab-tests/list';
   static const String labTestsDetails = '/lab-tests/list/details';
@@ -114,6 +116,12 @@ class AppRouter {
         path: cart,
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) => const CartScreen(),
+      ),
+
+      GoRoute(
+        path: selectLocation,
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => const SelectDeliveryLocationScreen(),
       ),
 
       GoRoute(

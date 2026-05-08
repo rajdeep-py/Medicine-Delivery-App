@@ -27,12 +27,16 @@ class Cart {
   final String? receiverName;
   final String? phone;
   final String? address;
+  final double? latitude;
+  final double? longitude;
 
   Cart({
     this.items = const [],
     this.receiverName,
     this.phone,
     this.address,
+    this.latitude,
+    this.longitude,
   });
 
   Cart copyWith({
@@ -40,12 +44,16 @@ class Cart {
     String? receiverName,
     String? phone,
     String? address,
+    double? latitude,
+    double? longitude,
   }) {
     return Cart(
       items: items ?? this.items,
       receiverName: receiverName ?? this.receiverName,
       phone: phone ?? this.phone,
       address: address ?? this.address,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
     );
   }
 

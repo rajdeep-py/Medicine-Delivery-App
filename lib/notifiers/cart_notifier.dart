@@ -47,11 +47,19 @@ class CartNotifier extends StateNotifier<Cart> {
     state = state.copyWith(items: updatedItems);
   }
 
-  void updateDeliveryDetails({String? name, String? phone, String? address}) {
+  void updateDeliveryDetails({
+    String? name,
+    String? phone,
+    String? address,
+    double? latitude,
+    double? longitude,
+  }) {
     state = state.copyWith(
       receiverName: name ?? state.receiverName,
       phone: phone ?? state.phone,
       address: address ?? state.address,
+      latitude: latitude ?? state.latitude,
+      longitude: longitude ?? state.longitude,
     );
   }
 

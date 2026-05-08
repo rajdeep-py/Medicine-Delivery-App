@@ -57,8 +57,16 @@ class CartScreen extends ConsumerWidget {
                         initialName: cart.receiverName,
                         initialPhone: cart.phone,
                         initialAddress: cart.address,
-                        onDetailsChanged: (name, phone, addr) {
-                          cartNotifier.updateDeliveryDetails(name: name, phone: phone, address: addr);
+                        onDetailsChanged: (name, phone, latLng) {
+                          cartNotifier.updateDeliveryDetails(
+                            name: name,
+                            phone: phone,
+                            latitude: latLng?.latitude,
+                            longitude: latLng?.longitude,
+                            address: latLng != null 
+                              ? "Lat: ${latLng.latitude.toStringAsFixed(4)}, Long: ${latLng.longitude.toStringAsFixed(4)}"
+                              : null,
+                          );
                         },
                       ),
                       
