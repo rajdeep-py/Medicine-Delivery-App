@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../screens/home/home_screen.dart';
 import '../screens/auth/splash_screen.dart';
 import '../screens/auth/login_screen.dart';
 import '../screens/main_wrapper.dart';
@@ -137,8 +138,7 @@ class AppRouter {
         routes: [
           GoRoute(
             path: home,
-            builder: (context, state) =>
-                const Scaffold(body: Center(child: Text('Home Screen'))),
+            builder: (context, state) => const HomeScreen(),
           ),
           GoRoute(
             path: medicine,

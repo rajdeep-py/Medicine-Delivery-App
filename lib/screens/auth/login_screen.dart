@@ -220,7 +220,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     ),
                     buttonText: 'Verify',
                     onButtonPressed: () {
-                      context.go('/lab-tests');
+                      context.go('/home');
                     },
                     footer: Center(
                       child: GestureDetector(
