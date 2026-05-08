@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
+import '../../providers/cart_provider.dart';
 import '../../theme/app_theme.dart';
 import '../../models/medicine.dart';
 import '../../notifiers/medicine_notifier.dart';
@@ -65,10 +66,14 @@ class _MedicineListScreenState extends ConsumerState<MedicineListScreen> {
                   itemBuilder: (context, index) => MedicineCard(
                     medicine: filteredMedicines[index],
                     onAddToCart: () {
+                      final medicine = filteredMedicines[index];
+                      ref.read(cartProvider.notifier).addToCart(medicine);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(
-                            '${filteredMedicines[index].name} added to cart',
+                          content: Text('${medicine.name} added to cart'),
+                          action: SnackBarAction(
+                            label: 'VIEW CART',
+                            onPressed: () => context.push('/cart'),
                           ),
                         ),
                       );
@@ -125,6 +130,24 @@ class _MedicineListScreenState extends ConsumerState<MedicineListScreen> {
               ),
             ),
           ),
+
+          // Floating Cart Icon
+          if (ref.watch(cartProvider).items.isNotEmpty)
+            Positioned(
+              bottom: 100,
+              right: AppSpacing.screenPadding,
+              child: FloatingActionButton(
+                onPressed: () => context.push('/cart'),
+                backgroundColor: AppColors.primary,
+                child: Badge(
+                  label: Text('${ref.watch(cartProvider).items.length}'),
+                  child: const Icon(
+                    IconsaxPlusLinear.shopping_cart,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
         ],
       ),
     );

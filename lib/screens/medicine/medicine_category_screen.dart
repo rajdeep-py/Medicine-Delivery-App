@@ -6,6 +6,7 @@ import '../../theme/app_theme.dart';
 import '../../notifiers/medicine_notifier.dart';
 import '../../cards/medicine/medicine_category_card.dart';
 import '../../cards/medicine/order_medicine_with_prescription_card.dart';
+import '../../providers/cart_provider.dart';
 
 class MedicineCategoryScreen extends ConsumerStatefulWidget {
   const MedicineCategoryScreen({super.key});
@@ -139,6 +140,20 @@ class _MedicineCategoryScreenState
           ),
           onPressed: () => context.push('/medicine/search'),
         ),
+        if (ref.watch(cartProvider).items.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: IconButton(
+              icon: Badge(
+                label: Text('${ref.watch(cartProvider).items.length}'),
+                child: const Icon(
+                  IconsaxPlusLinear.shopping_cart,
+                  color: AppColors.primary,
+                ),
+              ),
+              onPressed: () => context.push('/cart'),
+            ),
+          ),
         const SizedBox(width: 8),
       ],
     );

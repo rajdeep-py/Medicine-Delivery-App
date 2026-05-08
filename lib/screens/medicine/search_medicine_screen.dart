@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:iconsax_plus/iconsax_plus.dart';
 import '../../theme/app_theme.dart';
 import '../../notifiers/medicine_notifier.dart';
 import '../../cards/medicine/search_medicine_card.dart';
+import '../../providers/cart_provider.dart';
 
 class SearchMedicineScreen extends ConsumerStatefulWidget {
   const SearchMedicineScreen({super.key});
@@ -184,6 +186,19 @@ class _SearchMedicineScreenState extends ConsumerState<SearchMedicineScreen> {
                 },
               ),
             ),
+      floatingActionButton: ref.watch(cartProvider).items.isNotEmpty
+          ? FloatingActionButton(
+              onPressed: () => context.push('/cart'),
+              backgroundColor: AppColors.primary,
+              child: Badge(
+                label: Text('${ref.watch(cartProvider).items.length}'),
+                child: const Icon(
+                  IconsaxPlusLinear.shopping_cart,
+                  color: Colors.white,
+                ),
+              ),
+            )
+          : null,
     );
   }
 }

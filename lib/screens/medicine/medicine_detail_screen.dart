@@ -7,6 +7,8 @@ import '../../cards/medicine/medicine_composition_card.dart';
 import '../../cards/medicine/medicine_description_card.dart';
 import '../../cards/medicine/medicine_precautions_card.dart';
 import '../../cards/medicine/medicine_shop_card.dart';
+import '../../providers/cart_provider.dart';
+import 'package:go_router/go_router.dart';
 
 class MedicineDetailScreen extends ConsumerStatefulWidget {
   final Medicine medicine;
@@ -170,8 +172,15 @@ class _MedicineDetailScreenState extends ConsumerState<MedicineDetailScreen> {
             right: AppSpacing.screenPadding,
             child: InkWell(
               onTap: () {
+                ref.read(cartProvider.notifier).addToCart(widget.medicine);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Added to cart')),
+                  SnackBar(
+                    content: Text('${widget.medicine.name} added to cart'),
+                    action: SnackBarAction(
+                      label: 'VIEW CART',
+                      onPressed: () => context.push('/cart'),
+                    ),
+                  ),
                 );
               },
               borderRadius: BorderRadius.circular(16),
@@ -211,6 +220,21 @@ class _MedicineDetailScreenState extends ConsumerState<MedicineDetailScreen> {
               ),
             ),
           ),
+
+          // Floating Cart Icon
+          if (ref.watch(cartProvider).items.isNotEmpty)
+            Positioned(
+              top: 48,
+              right: 20,
+              child: FloatingActionButton.small(
+                onPressed: () => context.push('/cart'),
+                backgroundColor: Colors.white.withAlpha(200),
+                child: Badge(
+                  label: Text('${ref.watch(cartProvider).items.length}'),
+                  child: const Icon(IconsaxPlusLinear.shopping_cart, color: AppColors.primary, size: 20),
+                ),
+              ),
+            ),
         ],
       ),
     );
